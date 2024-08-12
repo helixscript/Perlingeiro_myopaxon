@@ -1,0 +1,77 @@
+---
+fontsize: 12pt
+geometry: margin=0.50in
+subparagraph: yes
+
+title:  "Analysis of integration site distributions and clonal abundances for lentiviral vector-based correction of cystinosis"
+date:   "December 2021"
+author: "John K. Everett, Ph.D. and Frederic Bushman, Ph.D."
+header-includes:
+    - \usepackage{caption}
+output:
+  pdf_document:
+    toc: true
+    keep_tex: no
+    latex_engine: xelatex
+---
+\captionsetup[table]{labelformat=empty}
+
+```{r, echo=FALSE, eval=TRUE}
+library(knitr)
+library(kableExtra)
+
+tab <- readRDS('sampleTable.rds')
+tab$Simpson <- sprintf("%.3f", tab$Simpson)
+
+kable(tab,  format = "latex", align='c', caption = 'Table 1. Overview of data collection.', booktabs = T, linesep = '', digits = c(0,0,0,0,0,0,0,3,3)) %>%
+  kable_styling(latex_options = c("hold_position", "striped", "scale_down"))
+```
+
+\vspace{5cm}
+
+
+
+```{r, echo=FALSE, eval=TRUE}
+library(knitr)
+library(kableExtra)
+
+tab <- readRDS('FisherTests.rds')
+tab$pVal <- format(tab$pVal, digits = 3)
+names(tab) <- c("Fisher's exact test", 'A near oncogenes', 'B near oncogenes', 'p-value')
+
+kable(tab,  format = "latex", caption = 'Table 1. Overview of data collection.', booktabs = T, linesep = '', align = c('l', 'c', 'c', 'c')) %>%
+  kable_styling(latex_options = c("hold_position", "striped", "scale_down"))
+```
+
+
+
+
+```{r, echo=FALSE, eval=TRUE}
+library(knitr)
+library(kableExtra)
+
+tab <- readRDS('sharedAbunds.rds')
+names(tab) <- c('iPSC', 'iPSC relAbund from shared sites', 'Myopaxon', 'Myopaxon relAbund from shared sites')
+
+kable(tab,  format = "latex", caption = 'Table 2. Contributions towards clonal abundance from shared sites.', booktabs = T, linesep = '', align = 'c') %>%
+  kable_styling(latex_options = c("hold_position", "striped", "scale_down"))
+```
+
+
+```{r, echo=FALSE, eval=TRUE}
+library(knitr)
+library(kableExtra)
+
+tab <- readr::read_tsv('sampleTable.tsv')
+
+kable(tab,  format = "latex", caption = 'Supplemental table 1.', booktabs = T, linesep = '', align = 'c') %>%
+  kable_styling(latex_options = c("hold_position", "striped"))
+```
+
+
+
+
+
+
+
+
